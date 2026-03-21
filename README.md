@@ -8,7 +8,7 @@ A gRPC server that renders [LilyPond](https://lilypond.org/) music notation to P
 
 ## Prerequisites
 
-- [Rust](https://rustup.rs/) (1.75+)
+- [Rust](https://rustup.rs/) (1.85+)
 - [LilyPond](https://lilypond.org/download.html) (2.24.x)
 - [Protocol Buffers compiler](https://grpc.io/docs/protoc-installation/) (`protoc`)
 
