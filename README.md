@@ -153,7 +153,6 @@ cargo run --bin test_client -- bass "c \\major" "<c e g>1" bass_chord.png
 ```
 grpcurl \
 	-plaintext \
-	-emit-defaults \
 	-d '{"clef":"TREBLE","key":"c \\\\major","notes":"<cis e g>1"}' \
 	'localhost:50051' lilypond.LilyPondService.Render
 ```
