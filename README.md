@@ -2,15 +2,9 @@
 
 A gRPC server that renders [LilyPond](https://lilypond.org/) music notation to PNG images. It manages a pool of LilyPond processes for concurrent rendering and returns cropped, high-resolution images as base64-encoded PNGs.
 
-## Features
+## Example
 
-- gRPC API for rendering LilyPond notation
-- Configurable clef, key signature, and notes
-- Pre-forked process pool with concurrency limiting
-- 600 DPI cropped PNG output
-- gRPC server reflection for service discovery
-- 30-second render timeout
-- Docker support
+<img src="example.png" style="max-width=50%; width=50%">
 
 ## Prerequisites
 
@@ -154,13 +148,14 @@ cargo run --bin test_client -- treble "d \\minor" "d4 e f g" output.png
 cargo run --bin test_client -- bass "c \\major" "<c e g>1" bass_chord.png
 ```
 
-### buf curl
+### grpcurl
 
-```bash
-buf curl --protocol grpc --http2-prior-knowledge \
-  -d '{"clef": 0, "key": "c \\\\major", "notes": "<cis e g>1"}' \
-  --schema proto/lilypond.proto \
-  http://localhost:50051/lilypond.LilyPondService/Render
+```
+grpcurl \
+	-plaintext \
+	-emit-defaults \
+	-d '{"clef":"TREBLE","key":"c \\\\major","notes":"<cis e g>1"}' \
+	'localhost:50051' lilypond.LilyPondService.Render
 ```
 
 ### Postman
@@ -178,16 +173,6 @@ buf curl --protocol grpc --http2-prior-knowledge \
    ```
 6. Click **Invoke**
 
-### Decoding the Response
-
-The response contains a base64-encoded PNG. To save it:
-
-```bash
-# From a file containing the base64 string
-base64 -d < b64.txt > output.png
-open output.png
-```
-
 ## Architecture
 
 ```
@@ -204,11 +189,6 @@ open output.png
                                │ LilyPond (N) │
                                └──────────────┘
 ```
-
-- Each render request gets its own temporary directory (automatically cleaned up)
-- A semaphore limits concurrent LilyPond processes to prevent memory exhaustion
-- Each LilyPond process uses ~50–100 MB of RAM
-- Renders timeout after 30 seconds
 
 ## License
 
