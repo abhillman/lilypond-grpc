@@ -18,7 +18,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let request = tonic::Request::new(RenderRequest {
         clef: Clef::Treble as i32,
         key: r"c \major".to_string(),
-        notes: "<c e g>1".to_string(),
+        notes: "< c' e' g' > 1".to_string(),
     });
 
     let response = client.render(request).await?;

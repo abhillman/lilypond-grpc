@@ -32,7 +32,7 @@ pub fn render_template(req: &RenderRequest) -> String {
     format!(
         r#"\version "2.24.0"
 
-\relative c' {{
+{{
   \omit Staff.TimeSignature
   \omit Staff.BarLine
   \clef {clef}
