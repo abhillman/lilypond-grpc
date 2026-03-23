@@ -1,3 +1,7 @@
+For an updated version that suppoorts generated SVGs and/or for an example as a part of a broader project, see https://github.com/abhillman/music-theory/tree/main/services/lilypond-grpc in the https://github.com/abhillman/music-theory/tree/main monorepo.
+
+---
+
 # lilypond-grpc
 
 A gRPC server that renders [LilyPond](https://lilypond.org/) music notation to PNG images. It manages a pool of LilyPond processes for concurrent rendering and returns cropped, high-resolution images as base64-encoded PNGs.
